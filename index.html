@@ -16,7 +16,6 @@
   <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
-  <!-- Custom CSS -->
   <style>
     .form-container {
       max-width: 500px;
@@ -59,7 +58,6 @@
     </div>
   </div>
 
-  <!-- JavaScript to handle form submission -->
   <script>
     const scriptURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
     const form = document.getElementById("submit-to-google-sheet");
@@ -68,15 +66,16 @@
       e.preventDefault();
       const formData = new FormData(form);
 
-      fetch(scriptURL, { method: "POST", body: formData })
-        .then((response) => {
-          swal("Done", "Submitted Successfully.", "success");
+      fetch(scriptURL, { method: "POST", body: formData, mode: "no-cors" })
+        .then(() => {
+          Swal.fire("Done", "Submitted Successfully.", "success");
           form.reset();
         })
-        .catch((error) => {
-          swal("Error", "Something went wrong. Please try again!", "error");
+        .catch(() => {
+          Swal.fire("Error", "Something went wrong. Please try again!", "error");
         });
     });
   </script>
+
 </body>
 </html>
