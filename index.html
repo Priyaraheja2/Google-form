@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beautiful Form</title>
+  <title>Form with Bootstrap</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 
   <style>
     body {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      background: #f8f9fa; /* Light grey background */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .form-container {
@@ -18,9 +18,9 @@
       margin: auto;
       margin-top: 80px;
       padding: 30px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       background-color: #fff;
-      border-radius: 15px;
+      border-radius: 12px;
       text-align: center;
       animation: fadeIn 1s ease-in-out;
     }
@@ -29,26 +29,27 @@
       color: #333;
     }
     .btn-custom {
-      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      background: #007bff;
       border: none;
       color: #fff;
       font-weight: bold;
       transition: all 0.3s ease;
     }
     .btn-custom:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      background: #0056b3;
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .thank-you {
       display: none;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       color: #28a745;
       margin-top: 20px;
       animation: fadeIn 1s ease-in-out;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -85,7 +86,7 @@
 
       <!-- Thank You Message -->
       <div id="thank-you" class="thank-you">
-        🎉 Thank you for submitting! <br> We’ve received your response.
+        ✅ Thank you! Your response has been submitted.
       </div>
     </div>
   </div>
