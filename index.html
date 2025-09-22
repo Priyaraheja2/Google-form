@@ -26,6 +26,17 @@
       background-color: #fff;
       border-radius: 8px;
     }
+    #form-status {
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+    #form-status.success {
+      color: green;
+    }
+    #form-status.error {
+      color: red;
+    }
   </style>
 </head>
 <body class="bg-light">
@@ -56,13 +67,17 @@
 
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
       </form>
+
+      <!-- Status message -->
+      <div id="form-status"></div>
     </div>
   </div>
 
   <script>
-    const scriptURL ="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
+    const scriptURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
     const form = document.getElementById("submit-to-google-sheet");
     const submitBtn = form.querySelector("button[type=submit]");
+    const statusDiv = document.getElementById("form-status");
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -74,18 +89,4 @@
 
       fetch(scriptURL, { method: "POST", body: formData, mode: "no-cors" })
         .then(() => {
-          Swal.fire("✅ Success", "Your response has been submitted!", "success");
-          form.reset();
-        })
-        .catch(() => {
-          Swal.fire("❌ Error", "Something went wrong. Please try again!", "error");
-        })
-        .finally(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Submit";
-        });
-    });
-  </script>
-
-</body>
-</html>
+          // Show success both in alert and on page
