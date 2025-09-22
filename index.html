@@ -4,11 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Form with Bootstrap</title>
+
+  <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- jQuery and Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+
+  <!-- Custom CSS -->
   <style>
     .form-container {
       max-width: 500px;
@@ -26,7 +34,7 @@
     <div class="form-container">
       <h4 class="text-center mb-4">Submit Your Info</h4>
       <form id="submit-to-google-sheet">
-        
+
         <!-- Name -->
         <div class="form-group">
           <label for="name">Full Name:</label>
@@ -39,11 +47,11 @@
           <input class="form-control" type="email" name="email" id="email" placeholder="Your Email" required />
         </div>
 
-        <!-- Phone -->
+        <!-- Phone (digits only, no specific format) -->
         <div class="form-group">
           <label for="phone">Phone Number:</label>
-          <input class="form-control" type="tel" name="phone" id="phone" placeholder="Your Phone Number" required pattern="[0-9]{10}" />
-          <small class="form-text text-muted">Enter 10-digit phone number</small>
+          <input class="form-control" type="tel" name="phone" id="phone" placeholder="Your Phone Number" required pattern="[0-9]+" minlength="7" maxlength="15" />
+          <small class="form-text text-muted">Digits only (no spaces or symbols)</small>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -51,13 +59,14 @@
     </div>
   </div>
 
+  <!-- JavaScript to handle form submission -->
   <script>
-    const scriptURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse?pli=1";
-    const form = document.forms["submit-to-google-sheet"];
+    const scriptURL = "action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse?pli=1"";
+    const form = document.getElementById("submit-to-google-sheet");
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var formData = new FormData(form);
+      const formData = new FormData(form);
 
       fetch(scriptURL, { method: "POST", body: formData })
         .then((response) => {
