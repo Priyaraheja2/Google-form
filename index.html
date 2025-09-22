@@ -13,9 +13,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <!-- SweetAlert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-
   <style>
     .form-container {
       max-width: 500px;
@@ -25,17 +22,13 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       background-color: #fff;
       border-radius: 8px;
-    }
-    #form-status {
-      margin-top: 15px;
-      font-weight: bold;
       text-align: center;
     }
-    #form-status.success {
+    .thank-you {
+      display: none;
+      font-size: 20px;
+      font-weight: bold;
       color: green;
-    }
-    #form-status.error {
-      color: red;
     }
   </style>
 </head>
@@ -44,8 +37,9 @@
   <div class="container">
     <div class="form-container">
       <h4 class="text-center mb-4">Submit Your Info</h4>
-      <form id="submit-to-google-sheet">
 
+      <!-- Form -->
+      <form id="submit-to-google-sheet">
         <!-- Full Name -->
         <div class="form-group">
           <label for="name">Full Name:</label>
@@ -68,25 +62,28 @@
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
       </form>
 
-      <!-- Status message -->
-      <div id="form-status"></div>
+      <!-- Thank You Message -->
+      <div id="thank-you" class="thank-you">
+        ✅ Thank you! Your response has been submitted.
+      </div>
     </div>
   </div>
 
   <script>
-    const scriptURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
+    const scriptURL ="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
     const form = document.getElementById("submit-to-google-sheet");
+    const thankYou = document.getElementById("thank-you");
     const submitBtn = form.querySelector("button[type=submit]");
-    const statusDiv = document.getElementById("form-status");
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       const formData = new FormData(form);
 
-      // Disable button & show loading text
+      // Disable button & show loading
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting...";
 
       fetch(scriptURL, { method: "POST", body: formData, mode: "no-cors" })
         .then(() => {
-          // Show success both in alert and on page
+          // Hide form & show thank you
+          form.style.display = "none";
