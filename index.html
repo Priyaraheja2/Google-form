@@ -24,6 +24,7 @@
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       background-color: #fff;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -59,20 +60,29 @@
   </div>
 
   <script>
-    const scriptURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
+    const scriptURL ="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
     const form = document.getElementById("submit-to-google-sheet");
+    const submitBtn = form.querySelector("button[type=submit]");
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       const formData = new FormData(form);
 
+      // Disable button & show loading text
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
       fetch(scriptURL, { method: "POST", body: formData, mode: "no-cors" })
         .then(() => {
-          Swal.fire("Done", "Submitted Successfully.", "success");
+          Swal.fire("✅ Success", "Your response has been submitted!", "success");
           form.reset();
         })
         .catch(() => {
-          Swal.fire("Error", "Something went wrong. Please try again!", "error");
+          Swal.fire("❌ Error", "Something went wrong. Please try again!", "error");
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit";
         });
     });
   </script>
