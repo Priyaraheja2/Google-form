@@ -35,22 +35,22 @@
       <h4 class="text-center mb-4">Submit Your Info</h4>
       <form id="submit-to-google-sheet">
 
-        <!-- Name -->
+        <!-- Full Name -->
         <div class="form-group">
           <label for="name">Full Name:</label>
-          <input class="form-control" type="text" name="name" id="name" placeholder="Your Name" required />
+          <input class="form-control" type="text" name="entry.238645701" id="name" placeholder="Your Name" required />
         </div>
 
         <!-- Email -->
         <div class="form-group">
           <label for="email">Email:</label>
-          <input class="form-control" type="email" name="email" id="email" placeholder="Your Email" required />
+          <input class="form-control" type="email" name="entry.90594895" id="email" placeholder="Your Email" required />
         </div>
 
-        <!-- Phone (digits only, no specific format) -->
+        <!-- Phone -->
         <div class="form-group">
           <label for="phone">Phone Number:</label>
-          <input class="form-control" type="tel" name="phone" id="phone" placeholder="Your Phone Number" required pattern="[0-9]+" minlength="7" maxlength="15" />
+          <input class="form-control" type="tel" name="entry.834246919" id="phone" placeholder="Your Phone Number" required pattern="[0-9]+" minlength="7" maxlength="15" />
           <small class="form-text text-muted">Digits only (no spaces or symbols)</small>
         </div>
 
@@ -61,7 +61,7 @@
 
   <!-- JavaScript to handle form submission -->
   <script>
-    const scriptURL = "action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse?pli=1"";
+    const scriptURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdT0P_eI-RtqbR9NiN0qmIigEgV-eS4459DnmaLxb-ykqsPBg/formResponse";
     const form = document.getElementById("submit-to-google-sheet");
 
     form.addEventListener("submit", function (e) {
